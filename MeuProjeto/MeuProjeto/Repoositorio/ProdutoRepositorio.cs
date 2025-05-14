@@ -57,5 +57,38 @@ namespace MeuProjeto.Repoositorio
                 return false;
             }
         }
+
+        public IEnumerable<Produto> TodosProduto()
+        {
+            List<Produto> Produtolist = new List<Produto>();
+
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * from produto", conexao);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                conexao.Close();
+
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Produtolist.Add(
+                        new Produto
+                        {
+                            IdPro = Convert.ToInt32(dr["IdPro"]),
+                            NomeP = ((string)dr["NomeP"]),
+                            DescricaoP = ((string)dr["DescricaoP"]),
+                            PresoP = ((double)dr["Presop"]),
+                            QuantidadeP = Convert.ToInt32(dr["QuantidadeP"]),
+                        });
+
+                    return Produtolist;
+                }
+            }
+        }
+
     }
 }
