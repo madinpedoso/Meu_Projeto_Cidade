@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 namespace MeuProjeto.Repoositorio
 {
     public class ProdutoRepositorio(IConfiguration configuration)
+    
     {
         private readonly string _conexaoMySQL = configuration.GetConnectionString("ConexaoMySQL");
 
@@ -89,6 +90,34 @@ namespace MeuProjeto.Repoositorio
                 }
             }
         }
+
+
+        public Produto ObterProduto(int Codigo)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * from produto where IdPro=@codigo ", conexao);
+                cmd.Parameters.AddWithValue("@codigo", Codigo);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr;
+
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dr.Read())
+                {
+                    Produto.IdPro = Convert.ToInt32(dr["InPro"]);
+                    Produto.NomeP = ((string)dr["NomeP"]);
+                    Produto.DescricaoP = ((string)dr["DescricaoP"]);
+                    Produto.PresoP = ((double)dr["Presop"]);
+                    Produto.QuantidadeP = Convert.ToInt32(dr["QuantidadeP"]);
+                }
+                return Produto;
+            }
+        }
+
 
     }
 }
