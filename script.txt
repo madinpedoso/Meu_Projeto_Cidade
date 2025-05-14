@@ -1,0 +1,17 @@
+CREATE database MeuProjeto;
+use MeuProjeto;
+
+create table Usuario(
+Id int primary key,
+Nome char(50) not null,
+Email char(50) not null,
+Senha char(50) not null
+);
+
+create table Produto(
+InId int primary key,
+InNome char(50) not null,
+InDescricao char(50) not null,
+InPreco double(5,2) not null,
+InQuantidade int not null
+);
