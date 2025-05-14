@@ -92,14 +92,14 @@ namespace MeuProjeto.Repoositorio
         }
 
 
-        public Produto ObterProduto(int Codigo)
+        public Produto ObterProduto(int IdP)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT * from produto where IdPro=@codigo ", conexao);
-                cmd.Parameters.AddWithValue("@codigo", Codigo);
+                MySqlCommand cmd = new MySqlCommand("SELECT * from produto where IdPro=@idpro ", conexao);
+                cmd.Parameters.AddWithValue("@idpro", IdP);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 MySqlDataReader dr;
@@ -118,6 +118,19 @@ namespace MeuProjeto.Repoositorio
             }
         }
 
+        public void Excluir(int Id)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
 
+                MySqlCommand cmd = new MySqlCommand("delete from cliente where IdPro=@idpro", conexao);
+
+                cmd.Parameters.AddWithValue("@idpro", Id);
+
+                int i = cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
+        }
     }
 }
