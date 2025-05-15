@@ -1,1 +1,51 @@
-﻿
+﻿@model MeuProjeto.Models.Produto;
+
+<link href="~/css/cadastracli.css" rel="stylesheet" />
+
+<h1 class="titulo-cli">Cadastrar Produto </h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CadastrarProduto">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="NomeP" class="control-label"></label>
+                <input asp-for="NomeP" class="form-control" />
+                <span asp-validation-for="NomeP" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DescricaoP" class="control-label"></label>
+                <input asp-for="DescricaoP" class="form-control" />
+                <span asp-validation-for="DescricaoP" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PresoP" class="control-label"></label>
+                <input asp-for="PresoP" class="form-control" />
+                <span asp-validation-for="PresoP" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="QuantidadeP" class="control-label"></label>
+                <input asp-for="QuantidadeP" class="form-control" />
+                <span asp-validation-for="QuantidadeP" class="text-danger"></span>
+            </div>
+
+            <div class="btn">
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                </div>
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-success">Voltar</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
