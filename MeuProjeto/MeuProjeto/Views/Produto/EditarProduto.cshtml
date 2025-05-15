@@ -1,15 +1,22 @@
 ﻿@model MeuProjeto.Models.Produto;
 
-<link href="~/css/cadastroproduto.css" rel="stylesheet" />
 
-<h1 class="titulo-produ">Cadastrar Produto </h1>
+<link href="~/css/editarproduto.css" rel="stylesheet" />
+
+<h1 class="titulo-produ">EditarProduto</h1>
 
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CadastrarProduto">
+        <form asp-action="EditarProduto" method="post">
+          @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="IdPro" class="form-control" />
+                <span asp-validation-for="IdPro" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="NomeP" class="control-label"></label>
@@ -37,15 +44,15 @@
 
             <div class="btn">
                 <div class="form-group">
-                    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                    <input type="submit" value="Alterar" class="btn btn-primary" />
                 </div>
+
                 <div class="form-group">
                     <a asp-action="Index" class="btn btn-success">Voltar</a>
                 </div>
             </div>
-
-
         </form>
     </div>
 </div>
+
 

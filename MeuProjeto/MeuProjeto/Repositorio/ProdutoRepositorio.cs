@@ -92,14 +92,14 @@ namespace MeuProjeto.Repositorio
         }
 
 
-        public Produto ObterProduto(int IdP)
+        public Produto ObterProduto(int IdPro)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
 
                 MySqlCommand cmd = new MySqlCommand("SELECT * from produto where IdPro=@idpro ", conexao);
-                cmd.Parameters.AddWithValue("@idpro", IdP);
+                cmd.Parameters.AddWithValue("@idpro", IdPro);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 MySqlDataReader dr;
