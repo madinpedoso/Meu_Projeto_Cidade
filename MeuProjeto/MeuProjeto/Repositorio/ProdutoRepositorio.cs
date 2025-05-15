@@ -3,7 +3,7 @@ using MeuProjeto.Models;
 using System.Data;
 using System.Security.Cryptography;
 
-namespace MeuProjeto.Repoositorio
+namespace MeuProjeto.Repositorio
 {
     public class ProdutoRepositorio(IConfiguration configuration)
     
