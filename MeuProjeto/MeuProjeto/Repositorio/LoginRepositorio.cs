@@ -9,7 +9,7 @@ namespace MeuProjeto.Repoositorio
     {
         private readonly string _conexaoMySQL = configuration.GetConnectionString("conexaoMySQl");
 
-        public Usuario ObterUsuari(string email)
+        public Usuario ObterUsuario(string email)
         {
             using(var conexao = new MySqlConnection(_conexaoMySQL))
             {
