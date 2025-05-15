@@ -31,7 +31,7 @@ namespace MeuProjeto.Controllers
         {
             _produtoRepositorio.Cadastrar(produto);
 
-           return RedirectToAction(nameof(Index));
+            return RedirectToAction("Teste", "Produto");
         }
 
         public IActionResult EditarProduto(int id)
@@ -51,6 +51,7 @@ namespace MeuProjeto.Controllers
 
         public IActionResult EditarProduto(int id, [Bind("IdPro, NomeP,DescricaoP,PresoP,QuantidadeP")] Produto produto)
         {
+
             if (id != produto.IdPro)
             {
                 return BadRequest();

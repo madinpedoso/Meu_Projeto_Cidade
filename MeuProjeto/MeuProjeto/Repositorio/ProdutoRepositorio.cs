@@ -16,12 +16,12 @@ namespace MeuProjeto.Repositorio
             {
                 conexao.Open();
 
-                MySqlCommand cmd = new MySqlCommand("inset into produto (NomeP,DescricaoP,PresoP,QuantidadeP) values (@nomep,@descricaop,@presop,@quantidadep)", conexao);
+                MySqlCommand cmd = new MySqlCommand("insert into produto (NomeP,DescricaoP,PresoP,QuantidadeP) values (@nomep,@descricaop,@presop,@quantidadep)", conexao);
 
-                cmd.Parameters.Add("@nomep", MySqlDbType.Varchar).Value = produto.NomeP;
-                cmd.Parameters.Add("@descricaop", MySqlDbType.Varchar).Value = produto.DescricaoP;
-                cmd.Parameters.Add("@presop", MySqlDbType.Varchar).Value = produto.PresoP; 
-                cmd.Parameters.Add("@quantidadep", MySqlDbType.Varchar).Value = produto.QuantidadeP;
+                cmd.Parameters.Add("@nomep", MySqlDbType.VarChar).Value = produto.NomeP;
+                cmd.Parameters.Add("@descricaop", MySqlDbType.VarChar).Value = produto.DescricaoP;
+                cmd.Parameters.Add("@presop", MySqlDbType.Decimal).Value = produto.PresoP; 
+                cmd.Parameters.Add("@quantidadep", MySqlDbType.Int32).Value = produto.QuantidadeP;
 
                 cmd.ExecuteNonQuery();
                 conexao.Close();
@@ -38,21 +38,22 @@ namespace MeuProjeto.Repositorio
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
                 {
                     conexao.Open();
-                    MySqlCommand cmd = new MySqlCommand("Update produto set NomeP=@nomep,DescricaoP=@descricaop,PresoP=@presop,QuantidadeP=@quantidadep" + "where IdPro=@idpro", conexao);
-                
+                    MySqlCommand cmd = new MySqlCommand(
+    "UPDATE Produto SET NomeP=@nomep, DescricaoP=@descricaop, PresoP=@presop, QuantidadeP=@quantidadep " +
+    "WHERE IdPro=@idpro", conexao);
+
                     cmd.Parameters.Add("@idpro", MySqlDbType.Int32).Value = produto.IdPro;
                     cmd.Parameters.Add("@nomep", MySqlDbType.VarChar).Value = produto.NomeP;
                     cmd.Parameters.Add("@descricaop", MySqlDbType.VarChar).Value = produto.DescricaoP;
-                    cmd.Parameters.Add("@presop", MySqlDbType.Double).Value = produto.PresoP;
+                    cmd.Parameters.Add("@presop", MySqlDbType.Decimal).Value = produto.PresoP;
                     cmd.Parameters.Add("@quantidadep", MySqlDbType.Int32).Value = produto.QuantidadeP;
 
                     int linhasAfetadas = cmd.ExecuteNonQuery();
                     return linhasAfetadas > 0;
-
                 }
 
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Erro ao atualizar Produto: {ex.Message}");
                 return false;
@@ -66,7 +67,7 @@ namespace MeuProjeto.Repositorio
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * from produto", conexao);
+                MySqlCommand cmd = new MySqlCommand("SELECT * from Produto", conexao);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -82,12 +83,13 @@ namespace MeuProjeto.Repositorio
                             IdPro = Convert.ToInt32(dr["IdPro"]),
                             NomeP = ((string)dr["NomeP"]),
                             DescricaoP = ((string)dr["DescricaoP"]),
-                            PresoP = ((double)dr["Presop"]),
+                            PresoP = (decimal)(dr["Presop"]),
                             QuantidadeP = Convert.ToInt32(dr["QuantidadeP"]),
                         });
 
-                    return Produtolist;
+                   
                 }
+                return Produtolist;
             }
         }
 
@@ -104,17 +106,18 @@ namespace MeuProjeto.Repositorio
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 MySqlDataReader dr;
 
+                Produto produto = new Produto();
                 dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (dr.Read())
                 {
-                    Produto.IdPro = Convert.ToInt32(dr["InPro"]);
-                    Produto.NomeP = ((string)dr["NomeP"]);
-                    Produto.DescricaoP = ((string)dr["DescricaoP"]);
-                    Produto.PresoP = ((double)dr["Presop"]);
-                    Produto.QuantidadeP = Convert.ToInt32(dr["QuantidadeP"]);
+                    produto.IdPro = Convert.ToInt32(dr["IdPro"]);
+                    produto.NomeP = ((string)dr["NomeP"]);
+                    produto.DescricaoP = ((string)dr["DescricaoP"]);
+                    produto.PresoP = (decimal)(dr["Presop"]);
+                    produto.QuantidadeP = Convert.ToInt32(dr["QuantidadeP"]);
                 }
-                return Produto;
+                return produto;
             }
         }
 
@@ -124,7 +127,7 @@ namespace MeuProjeto.Repositorio
             {
                 conexao.Open();
 
-                MySqlCommand cmd = new MySqlCommand("delete from cliente where IdPro=@idpro", conexao);
+                MySqlCommand cmd = new MySqlCommand("delete from Produto where IdPro=@idpro", conexao);
 
                 cmd.Parameters.AddWithValue("@idpro", Id);
 

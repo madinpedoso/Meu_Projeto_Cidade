@@ -14,7 +14,7 @@ namespace MeuProjeto.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
@@ -25,7 +25,7 @@ namespace MeuProjeto.Controllers
             var usuario = _loginRepositorio.ObterUsuario(email);
              if (usuario != null && usuario.Senha == senha)
             {
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Index", "Produto");
             }
         
             ModelState.AddModelError("", "Email ou senha inválidos.");

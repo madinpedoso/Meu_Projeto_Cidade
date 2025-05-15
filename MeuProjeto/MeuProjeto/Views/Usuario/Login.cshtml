@@ -1,4 +1,4 @@
-﻿@model ProjetoEcommerce.Models.Usuario;
+﻿@model MeuProjeto.Models.Usuario;
 
 
 <link href="~/css/login.css" rel="stylesheet" />
@@ -6,11 +6,6 @@
 <h1 class="login-title">Login</h1>
 
 <form asp-action="Login" method="post" class="login-form">
-
-      <div class="form-group">
-        <label>Nome:</label>
-        <input type="text" name="nome" required  class="form-control"/>
-    </div>
     <div class="form-group">
         <label>Email:</label>
         <input type="email" name="email" required  class="form-control"/>
