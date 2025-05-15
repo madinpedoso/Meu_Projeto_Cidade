@@ -49,7 +49,7 @@ namespace MeuProjeto.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult EditarProduto(int id, [Bind("IdPro, NomeP,DescricaoP,EmailP,PresoP,QuantidadeP")] Produto produto)
+        public IActionResult EditarProduto(int id, [Bind("IdPro, NomeP,DescricaoP,PresoP,QuantidadeP")] Produto produto)
         {
             if (id != produto.IdPro)
             {
