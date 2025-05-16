@@ -1,6 +1,10 @@
+body {
+    background-image: linear-gradient(rgb(14, 55, 151) , rgb(145, 86, 230));
+}
+
 .login-title {
     text-align: center;
-    color: blue;
+    color: rgb(235, 145, 181);
     margin-bottom: 20px;
 }
 
@@ -31,7 +35,7 @@
 }
 
 .btn-primary {
-    background-image: linear-gradient(purple,aqua);
+    background-image: linear-gradient( rgb(198, 28, 100), rgb(97, 35, 182));
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -43,5 +47,11 @@
 }
 
     .btn-primary:hover {
-        background: blue;
+        background-image: linear-gradient(rgb(55, 124, 247), rgb(211, 147, 255));
+        color:rgb(255, 198, 221);
     }
+
+.text
+{
+    color : rgb(195, 70, 127);
+}
